@@ -1,0 +1,32 @@
+[submodule "IsaacLab"]
+	path = IsaacLab
+	url = git@github.com:pavelmino44/IsaacLab.git
+	branch = pavel/go2-modifications
+[submodule "unitree_rl_lab"]
+	path = unitree_rl_lab
+	url = git@github.com:pavelmino44/unitree_rl_lab.git
+	branch = pavel/go2-modifications
+[submodule "unitree_mujoco"]
+	path = unitree_mujoco
+	url = git@github.com:pavelmino44/unitree_mujoco.git
+	branch = pavel/go2-modifications
+[submodule "unitree_ros"]
+	path = unitree_ros
+	url = git@github.com:pavelmino44/unitree_ros.git
+	branch = pavel/go2-modifications
+[submodule "unitree_ros2"]
+	path = unitree_ros2
+	url = git@github.com:pavelmino44/unitree_ros2.git
+	branch = pavel/go2-modifications
+[submodule "unitree_sdk2"]
+	path = unitree_sdk2
+	url = git@github.com:pavelmino44/unitree_sdk2.git
+	branch = pavel/go2-modifications
+[submodule "unitree_sdk2_python"]
+	path = unitree_sdk2_python
+	url = git@github.com:pavelmino44/unitree_sdk2_python.git
+	branch = pavel/go2-modifications
+[submodule "unitree_metrics"]
+	path = unitree_metrics
+	url = git@github.com:pavelmino44/unitree_metrics.git
+	branch = main
