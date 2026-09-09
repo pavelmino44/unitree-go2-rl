@@ -4,6 +4,11 @@ Research framework for reinforcement learning, autonomous locomotion, and sim-to
 
 The project integrates the main components of the experimental stack as Git submodules. The repository is intended to provide a reproducible environment for development, training, evaluation, and analysis of locomotion controllers.
 
+<p align="center">
+  <img src="./docs/training_process.png" width="45%" alt="Reinforcement learning training process">
+  <img src="./docs/test_stairs.png" width="45%" alt="Unitree Go2 stair climbing test">
+</p>
+
 ## Project Structure
 
 ```text
@@ -20,16 +25,16 @@ unitree-go2-rl/
 
 ## Components
 
-| Component                                                                     | Purpose                                             | License      |
-| ----------------------------------------------------------------------------- | --------------------------------------------------- | ------------ |
-| [IsaacLab](https://github.com/isaac-sim/IsaacLab)                             | Training simulator and RL environment               | BSD-3-Clause |
-| [unitree_rl_lab](https://github.com/unitreerobotics/unitree_rl_lab)           | RL training framework and locomotion configurations | Apache-2.0   |
-| [unitree_mujoco](https://github.com/unitreerobotics/unitree_mujoco)           | MuJoCo simulation and sim-to-sim evaluation         | BSD-3-Clause |
-| [unitree_ros](https://github.com/unitreerobotics/unitree_ros)                 | ROS integration                                     | BSD-3-Clause |
-| [unitree_ros2](https://github.com/unitreerobotics/unitree_ros2)               | ROS 2 integration                                   | BSD-3-Clause |
-| [unitree_sdk2](https://github.com/unitreerobotics/unitree_sdk2)               | C++ SDK for Unitree robots                          | BSD-3-Clause |
-| [unitree_sdk2_python](https://github.com/unitreerobotics/unitree_sdk2_python) | Python SDK for Unitree robots                       | BSD-3-Clause |
-| [unitree_metrics](https://github.com/pavelmino44/unitree_metrics)             | Training metrics analysis and visualization         | MIT          |
+| Component           | Purpose                                             |
+| ------------------- | --------------------------------------------------- |
+| IsaacLab            | Training simulator and RL environment               |
+| unitree_rl_lab      | RL training framework and locomotion configurations |
+| unitree_mujoco      | MuJoCo simulation and sim-to-sim evaluation         |
+| unitree_ros         | ROS integration                                     |
+| unitree_ros2        | ROS 2 integration                                   |
+| unitree_sdk2        | C++ SDK for Unitree robots                          |
+| unitree_sdk2_python | Python SDK for Unitree robots                       |
+| unitree_metrics     | Training metrics analysis and visualization         |
 
 ## Repository Organization
 
@@ -53,6 +58,10 @@ If the repository has already been cloned without submodules:
 git submodule update --init --recursive
 ```
 
+## Documentation
+
+Detailed setup, usage, and experiment instructions are available in the `docs/` directory.
+
 ## Development Status
 
 The project is under active development.
@@ -66,7 +75,7 @@ The current stack is focused on:
 * ROS 2 and Unitree SDK integration;
 * analysis and visualization of training metrics.
 
-Installation and experiment-specific instructions will be added as the project structure develops.
+Installation and experiment-specific instructions are being documented as the project develops.
 
 ## License
 
