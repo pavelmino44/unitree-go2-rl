@@ -6,9 +6,11 @@ The project integrates the main components of the experimental stack as Git subm
 
 <p align="center">
   <img src="./docs/training_process.png" width="45%" alt="Reinforcement learning training process">
-  <img src="./docs/test_stairs.png" width="45%" alt="Unitree Go2 stair climbing test">
 </p>
 
+<p align="center">
+ <img src="./docs/test_stairs.png" width="45%" alt="Unitree Go2 stair climbing test">
+</p>
 ## Project Structure
 
 ```text
