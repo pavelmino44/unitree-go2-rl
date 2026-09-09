@@ -11,6 +11,7 @@ The project integrates the main components of the experimental stack as Git subm
 <p align="center">
  <img src="./docs/test_stairs.png" width="90%" alt="Unitree Go2 stair climbing test">
 </p>
+
 ## Project Structure
 
 ```text
