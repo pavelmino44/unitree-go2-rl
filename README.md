@@ -5,11 +5,11 @@ Research framework for reinforcement learning, autonomous locomotion, and sim-to
 The project integrates the main components of the experimental stack as Git submodules. The repository is intended to provide a reproducible environment for development, training, evaluation, and analysis of locomotion controllers.
 
 <p align="center">
-  <img src="./docs/training_process.png" width="45%" alt="Reinforcement learning training process">
+  <img src="./docs/training_process.png" width="90%" alt="Reinforcement learning training process">
 </p>
 
 <p align="center">
- <img src="./docs/test_stairs.png" width="45%" alt="Unitree Go2 stair climbing test">
+ <img src="./docs/test_stairs.png" width="90%" alt="Unitree Go2 stair climbing test">
 </p>
 ## Project Structure
 
