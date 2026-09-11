@@ -186,12 +186,20 @@ The controller communicates with the MuJoCo simulation through the configured ne
 
 The current configuration uses different network interfaces depending on the target:
 
-| Target                    | Interface |
-| ------------------------- | --------- |
-| Real Unitree Go2          | `eno1`    |
-| MuJoCo / local simulation | `wlp4s0`  |
+| Target                    | Interface                  |
+| ------------------------- | -------------------------- |
+| Real Unitree Go2          | `Your_wired_interface`     |
+| MuJoCo / local simulation | `Your_wireless_interface`  |
 
 These values correspond to the current development machine configuration and may need to be changed when reproducing the project on another computer.
+
+---
+
+## More documentation
+
+You can find more detailed documentation for each of the repositories included in the project in their respective README.md files.
+
+---
 
 ## Notes
 

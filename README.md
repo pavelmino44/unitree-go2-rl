@@ -4,11 +4,17 @@ Research framework for reinforcement learning, autonomous locomotion, and sim-to
 
 The project integrates the main components of the experimental stack as Git submodules. The repository is intended to provide a reproducible environment for development, training, evaluation, and analysis of locomotion controllers.
 
----
+This version of the project provides a framework for conducting experiments on observation-space design using Actor-Critic PPO (RSL-RL) as the primary reinforcement learning algorithm. It allows users to build and train locomotion policies, experiment with domain randomization, and validate the resulting controllers through sim-to-sim and sim-to-real transfer.
 
 <p align="center">
-  <img src="./docs/training_process.png" width="90%" alt="Reinforcement learning training process">
+  <img src="./docs/training_process.png" width="98%" alt="Reinforcement learning training process">
 </p>
+
+> **⚠️ WARNING — SIM-TO-REAL SAFETY**
+>
+> Exercise extreme caution when performing sim-to-real transfer of locomotion controllers. Improperly selected domain-randomization parameters can result in unstable or unsafe robot behavior and may cause **serious damage to the robot or its surroundings**.
+>
+> **Always perform thorough sim-to-sim validation before attempting to deploy a controller on the physical robot.** Never deploy an unvalidated controller directly to a real robot.
 
 ---
 
@@ -17,9 +23,10 @@ The project integrates the main components of the experimental stack as Git subm
 ```text
 unitree-go2-rl/
 ├── IsaacLab/                 # Training simulator and RL environment
+├── docs/                     # Setup and usage documentation
 ├── unitree_rl_lab/           # Reinforcement learning framework and training configurations
 ├── unitree_mujoco/           # MuJoCo simulation and sim-to-sim evaluation
-├── unitree_ros/              # ROS integration
+├── unitree_ros/              # ROS integration and urdf source
 ├── unitree_ros2/             # ROS 2 integration
 ├── unitree_sdk2/             # C++ SDK
 ├── unitree_sdk2_python/      # Python SDK
@@ -30,10 +37,10 @@ unitree-go2-rl/
 
 | Component           | Purpose                                             |
 | ------------------- | --------------------------------------------------- |
-| IsaacLab            | Training simulator and RL environment               |
+| IsaacLab (v2.3.0)   | Training simulator and RL environment               |
 | unitree_rl_lab      | RL training framework and locomotion configurations |
 | unitree_mujoco      | MuJoCo simulation and sim-to-sim evaluation         |
-| unitree_ros         | ROS integration                                     |
+| unitree_ros         | ROS integration and urdf source                     |
 | unitree_ros2        | ROS 2 integration                                   |
 | unitree_sdk2        | C++ SDK for Unitree robots                          |
 | unitree_sdk2_python | Python SDK for Unitree robots                       |
@@ -47,7 +54,9 @@ The main repository records the exact commit of each submodule used by the proje
 
 The branches specified in `.gitmodules` are used for convenient development and updates, while the commit recorded by the main repository determines the exact version used in a particular revision.
 
-## Cloning
+## Usage
+
+### Cloning
 
 Clone the complete project together with all submodules:
 
@@ -80,10 +89,8 @@ The current stack is focused on:
 
 Installation and experiment-specific instructions are being documented as the project develops.
 
----
-
 <p align="center">
- <img src="./docs/test_stairs.png" width="90%" alt="Unitree Go2 stair climbing test">
+ <img src="./docs/test_stairs.png" width="98%" alt="Unitree Go2 stair climbing test">
 </p>
 
 ---
