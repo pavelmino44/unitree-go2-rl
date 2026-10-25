@@ -24,6 +24,10 @@ This version of the project provides a framework for conducting experiments on o
 unitree-go2-rl/
 ├── IsaacLab/                 # Training simulator and RL environment
 ├── docs/                     # Setup and usage documentation
+├── ros2_ws/                  # ROS 2 Humble workspace
+│   └── src/
+│       ├── go2_policy_runner/    # Policy controller for MuJoCo and the real robot
+│       └── unitree -> ../../unitree_ros2/cyclonedds_ws/src/unitree   # Unitree message packages
 ├── unitree_rl_lab/           # Reinforcement learning framework and training configurations
 ├── unitree_mujoco/           # MuJoCo simulation and sim-to-sim evaluation
 ├── unitree_ros/              # ROS integration and urdf source
@@ -35,20 +39,21 @@ unitree-go2-rl/
 
 ## Components
 
-| Component           | Purpose                                             |
-| ------------------- | --------------------------------------------------- |
-| IsaacLab (v2.3.0)   | Training simulator and RL environment               |
-| unitree_rl_lab      | RL training framework and locomotion configurations |
-| unitree_mujoco      | MuJoCo simulation and sim-to-sim evaluation         |
-| unitree_ros         | ROS integration and urdf source                     |
-| unitree_ros2        | ROS 2 integration                                   |
-| unitree_sdk2        | C++ SDK for Unitree robots                          |
-| unitree_sdk2_python | Python SDK for Unitree robots                       |
-| unitree_metrics     | Training metrics analysis and visualization         |
+| Component           | Purpose                                                            |
+| ------------------- | ------------------------------------------------------------------ |
+| IsaacLab (v2.3.0)   | Training simulator and RL environment                              |
+| unitree_rl_lab      | RL training framework and locomotion configurations                |
+| unitree_mujoco      | MuJoCo simulation and sim-to-sim evaluation                        |
+| go2_policy_runner   | ROS 2 controller running trained policies in MuJoCo and on the Go2 |
+| unitree_ros         | ROS integration and urdf source                                    |
+| unitree_ros2        | ROS 2 integration and Unitree message definitions                  |
+| unitree_sdk2        | C++ SDK for Unitree robots                                         |
+| unitree_sdk2_python | Python SDK for Unitree robots                                      |
+| unitree_metrics     | Training metrics analysis and visualization                        |
 
 ## Repository Organization
 
-The repositories listed above are included as Git submodules.
+The repositories listed above are included as Git submodules. `go2_policy_runner` is located inside the ROS 2 workspace at `ros2_ws/src/go2_policy_runner`.
 
 The main repository records the exact commit of each submodule used by the project. This makes it possible to reproduce a known project state even when the individual component repositories continue to evolve.
 
@@ -72,7 +77,8 @@ git submodule update --init --recursive
 
 ## Documentation
 
-Detailed setup, usage, and experiment instructions are available in the `docs/` directory.
+Setup, usage, and component documentation: [docs/README.md](docs/README.md).
+
 
 ## Development Status
 
@@ -84,6 +90,7 @@ The current stack is focused on:
 * Unitree Go2 velocity control;
 * training in IsaacLab;
 * sim-to-sim evaluation in MuJoCo;
+* ROS 2 policy deployment with identical simulation and real-robot pipelines;
 * ROS 2 and Unitree SDK integration;
 * analysis and visualization of training metrics.
 
@@ -104,6 +111,7 @@ Each submodule retains its original license and copyright notices. The applicabl
 * IsaacLab — BSD-3-Clause
 * unitree_rl_lab — Apache License 2.0
 * unitree_mujoco — BSD-3-Clause
+* go2_policy_runner — Apache License 2.0 (contains code derived from unitree_rl_lab, unitree_sdk2 and unitree_ros2, see its `NOTICE` and `THIRD_PARTY_NOTICES.md`)
 * unitree_ros — BSD-3-Clause
 * unitree_ros2 — BSD-3-Clause
 * unitree_sdk2 — BSD-3-Clause

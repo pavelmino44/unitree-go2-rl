@@ -5,7 +5,7 @@
 Setup of Ubuntu 22.04 + ROS 2 Humble for working with the Unitree Go2 and `unitree_mujoco`.
 Paths assume the repository is cloned to `~/unitree-go2-rl`.
 
-Running the policy controller: [`go2_policy_runner`](../ros2_ws/src/go2_policy_runner/README.md).
+Running the policy controller: [`go2_policy_runner`](https://github.com/pavelmino44/go2_policy_runner).
 
 ## Contents
 

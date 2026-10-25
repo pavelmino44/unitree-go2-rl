@@ -5,7 +5,7 @@
 Настройка Ubuntu 22.04 + ROS 2 Humble для работы с Unitree Go2 и `unitree_mujoco`.
 Пути указаны для репозитория, склонированного в `~/unitree-go2-rl`.
 
-Запуск контроллера политики: [`go2_policy_runner`](../ros2_ws/src/go2_policy_runner/README.md).
+Запуск контроллера политики: [`go2_policy_runner`](https://github.com/pavelmino44/go2_policy_runner).
 
 ## Содержание
 

@@ -1,5 +1,7 @@
 # Setup and Usage
 
+**English** | [Русский](./setup-and-usage_ru.md)
+
 This document contains the environment configuration and basic commands required to run the Unitree Go2 reinforcement learning stack.
 
 ## Python Environment
