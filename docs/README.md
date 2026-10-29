@@ -8,6 +8,7 @@
 |---|---|
 | [Setup and usage](./setup-and-usage_en.md) | Python / Conda environments, training in `unitree_rl_lab`, MuJoCo, running on the real robot |
 | [ROS 2, CycloneDDS and Unitree setup](./ros2_unitree_setup_en.md) | Ubuntu 22.04 + ROS 2 Humble, CycloneDDS, `unitree_sdk2`, `unitree_mujoco`, `ros2_ws`, network interfaces, troubleshooting |
+| [Parameter mapping](./parameter-mapping_en.md) | Where training, MuJoCo and `go2_policy_runner` parameters are defined and how they correspond |
 
 ## Component documentation
 

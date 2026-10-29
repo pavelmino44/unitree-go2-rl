@@ -8,6 +8,7 @@
 |---|---|
 | [Настройка и использование](./setup-and-usage_ru.md) | Окружения Python / Conda, обучение в `unitree_rl_lab`, MuJoCo, запуск на реальном роботе |
 | [Настройка ROS 2, CycloneDDS и Unitree](./ros2_unitree_setup_ru.md) | Ubuntu 22.04 + ROS 2 Humble, CycloneDDS, `unitree_sdk2`, `unitree_mujoco`, `ros2_ws`, сетевые интерфейсы, типичные проблемы |
+| [Соответствие параметров](./parameter-mapping_ru.md) | Где задаются параметры обучения, MuJoCo и `go2_policy_runner` и как они соотносятся |
 
 ## Документация компонентов
 
