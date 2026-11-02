@@ -10,9 +10,8 @@ This version of the project provides a framework for conducting experiments on o
   <img src="./docs/training_process.png" width="98%" alt="Reinforcement learning training process">
 </p>
 
-> **⚠️ WARNING — SIM-TO-REAL SAFETY**
->
-> Exercise extreme caution when performing sim-to-real transfer of locomotion controllers. Improperly selected domain-randomization parameters can result in unstable or unsafe robot behavior and may cause **serious damage to the robot or its surroundings**.
+> [!WARNING]
+> **Sim-to-real safety.** Exercise extreme caution when performing sim-to-real transfer of locomotion controllers. Improperly selected domain-randomization parameters can result in unstable or unsafe robot behavior and may cause **serious damage to the robot or its surroundings**.
 >
 > **Always perform thorough sim-to-sim validation before attempting to deploy a controller on the physical robot.** Never deploy an unvalidated controller directly to a real robot.
 
@@ -81,6 +80,14 @@ git submodule update --init --recursive
 
 Setup, usage, and component documentation: [docs/README.md](docs/README.md).
 
+## What's New
+
+The project now has reproducible policy tests and a quantitative sim-to-sim transferability assessment:
+
+* **[go2_policy_runner](https://github.com/pavelmino44/go2_policy_runner)** — a ROS 2 controller that runs the trained ONNX policy through the same pipeline in MuJoCo and on the real Go2, with passive / stand / walk modes and command limits taken from the training configuration.
+* **[Evaluation in unitree_rl_lab](https://github.com/pavelmino44/unitree_rl_lab/blob/pavel/go2-modifications/doc/Evaluation_en.md)** — a fixed set of test scenarios (one obstacle per scenario: flat, slopes, stairs, boxes, rough terrain), per-episode metrics, reports and a GUI for evaluating policies in IsaacLab.
+* **IsaacLab terrains in MuJoCo** — the evaluation terrains are exported from `unitree_rl_lab` and rebuilt as MuJoCo scenes in `unitree_mujoco`, so both simulators test the policy on the same geometry.
+* **[go2_eval](ros2_ws/src/go2_eval/README.md)** — runs the same scenarios in MuJoCo through `go2_policy_runner`, computes the same metrics, and compares IsaacLab and MuJoCo results side by side (`eval_compare`) to measure sim-to-sim transferability.
 
 ## Development Status
 
@@ -95,6 +102,11 @@ The current stack is focused on:
 * ROS 2 policy deployment with identical simulation and real-robot pipelines;
 * ROS 2 and Unitree SDK integration;
 * analysis and visualization of training metrics.
+
+Work in progress:
+
+* LiDAR simulation;
+* training of exteroceptive locomotion policies.
 
 Installation and experiment-specific instructions are being documented as the project develops.
 
