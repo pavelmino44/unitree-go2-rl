@@ -1,3 +1,5 @@
+# Copyright (c) 2026, unitree-go2-rl contributors.
+# SPDX-License-Identifier: Apache-2.0
 """Sim-to-sim comparison: an IsaacLab report (unitree_rl_lab evaluate.py) against a MuJoCo report (go2_eval).
 
 Both reports have the same format, so the scenarios are matched by name and the same summary numbers are
@@ -299,6 +301,75 @@ def comparison_figure(plt, isaac: dict, mujoco: dict, names: list[str], titles: 
     return fig
 
 
+def _has_tk() -> bool:
+    try:
+        import tkinter  # noqa: F401
+        from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg  # noqa: F401
+    except Exception:
+        return False
+    return True
+
+
+def show_figures(figures: list[tuple]):
+    """Show each figure at its real proportions in its own window, with scroll bars when it is larger than the
+    screen (the figure is scaled to the screen width, its height scrolls). Blocks until all windows are closed."""
+    import tkinter as tk
+    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+
+    root = tk.Tk()
+    root.withdraw()
+    screen_w, screen_h = root.winfo_screenwidth(), root.winfo_screenheight()
+    open_windows = []
+
+    def close(win):
+        win.destroy()
+        open_windows.remove(win)
+        if not open_windows:
+            root.quit()
+
+    for k, (fig, title) in enumerate(figures):
+        win = tk.Toplevel(root)
+        win.title(title)
+        win.configure(background=R.BG)
+        w_in, h_in = fig.get_size_inches()
+        # never wider than the screen, never larger than the 100 dpi of the saved look
+        fig.set_dpi(min(100.0, (screen_w - 80) / w_in))
+        frame = tk.Frame(win, background=R.BG)
+        frame.pack(side="top", fill="both", expand=True)
+        view = tk.Canvas(frame, background=R.BG, highlightthickness=0)
+        vbar = tk.Scrollbar(frame, orient="vertical", command=view.yview)
+        hbar = tk.Scrollbar(frame, orient="horizontal", command=view.xview)
+        view.configure(yscrollcommand=vbar.set, xscrollcommand=hbar.set)
+        vbar.pack(side="right", fill="y")
+        hbar.pack(side="bottom", fill="x")
+        view.pack(side="left", fill="both", expand=True)
+        canvas = FigureCanvasTkAgg(fig, master=view)
+        widget = canvas.get_tk_widget()
+        canvas.draw()
+        w_px, h_px = int(w_in * fig.dpi), int(h_in * fig.dpi)
+        widget.configure(width=w_px, height=h_px)
+        view.create_window(0, 0, window=widget, anchor="nw")
+        view.configure(scrollregion=(0, 0, w_px, h_px))
+        toolbar = NavigationToolbar2Tk(canvas, win, pack_toolbar=False)  # save / zoom like a normal window
+        toolbar.update()
+        toolbar.pack(side="bottom", fill="x", before=frame)
+
+        def wheel(event, view=view):
+            if getattr(event, "num", None) == 4 or getattr(event, "delta", 0) > 0:
+                view.yview_scroll(-3, "units")
+            else:
+                view.yview_scroll(3, "units")
+
+        for seq in ("<MouseWheel>", "<Button-4>", "<Button-5>"):
+            widget.bind(seq, wheel)
+            view.bind(seq, wheel)
+        win.geometry(f"{min(w_px + 30, screen_w - 40)}x{min(h_px + 70, screen_h - 100)}+{20 + 40 * k}+{20 + 40 * k}")
+        win.protocol("WM_DELETE_WINDOW", lambda win=win: close(win))
+        open_windows.append(win)
+    root.mainloop()
+    root.destroy()
+
+
 class _Tee(io.TextIOBase):
     """Writes to the terminal and keeps a copy of the text (for compare.txt)."""
 
@@ -349,7 +420,10 @@ def main(argv=None):
 
     import matplotlib
 
-    if not show:
+    # The figures are drawn off-screen and shown in scrollable windows (show_figures): a normal matplotlib window
+    # is squeezed to the screen size, which makes the labels of these tall figures overlap.
+    scroll_windows = show and _has_tk()
+    if not show or scroll_windows:
         matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
@@ -368,7 +442,10 @@ def main(argv=None):
             "  metrics.png     (mean over the scenarios, per metric)\n  compare.txt     (comparison tables)"
         )
     if show:
-        plt.show()
+        if scroll_windows:
+            show_figures([(fig, "Sim-to-sim per scenario"), (fig_metrics, "Sim-to-sim metrics")])
+        else:
+            plt.show()
 
 
 def _report(args, stamp: str):

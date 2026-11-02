@@ -27,6 +27,7 @@ unitree-go2-rl/
 ├── ros2_ws/                  # ROS 2 Humble workspace
 │   └── src/
 │       ├── go2_policy_runner/    # Policy controller for MuJoCo and the real robot
+│       ├── go2_eval/             # Policy evaluation in MuJoCo, sim-to-sim comparison
 │       └── unitree -> ../../unitree_ros2/cyclonedds_ws/src/unitree   # Unitree message packages
 ├── unitree_rl_lab/           # Reinforcement learning framework and training configurations
 ├── unitree_mujoco/           # MuJoCo simulation and sim-to-sim evaluation
@@ -45,6 +46,7 @@ unitree-go2-rl/
 | unitree_rl_lab      | RL training framework and locomotion configurations                |
 | unitree_mujoco      | MuJoCo simulation and sim-to-sim evaluation                        |
 | go2_policy_runner   | ROS 2 controller running trained policies in MuJoCo and on the Go2 |
+| go2_eval            | Policy evaluation in MuJoCo on the IsaacLab scenarios (sim-to-sim) |
 | unitree_ros         | ROS integration and urdf source                                    |
 | unitree_ros2        | ROS 2 integration and Unitree message definitions                  |
 | unitree_sdk2        | C++ SDK for Unitree robots                                         |
@@ -53,7 +55,7 @@ unitree-go2-rl/
 
 ## Repository Organization
 
-The repositories listed above are included as Git submodules. `go2_policy_runner` is located inside the ROS 2 workspace at `ros2_ws/src/go2_policy_runner`.
+The repositories listed above are included as Git submodules. `go2_policy_runner` is located inside the ROS 2 workspace at `ros2_ws/src/go2_policy_runner`. `go2_eval` is part of this repository (`ros2_ws/src/go2_eval`).
 
 The main repository records the exact commit of each submodule used by the project. This makes it possible to reproduce a known project state even when the individual component repositories continue to evolve.
 
@@ -104,18 +106,23 @@ Installation and experiment-specific instructions are being documented as the pr
 
 ## License
 
-This repository integrates multiple independent projects as Git submodules.
+The files of this repository (documentation, top-level configuration and the `go2_eval` package) are licensed under the [Apache License 2.0](LICENSE). The software is provided "as is", without warranty of any kind.
 
-Each submodule retains its original license and copyright notices. The applicable licenses are:
+The submodules are separate works. Each keeps its own license and copyright notices, and the LICENSE of this repository does not apply to them:
 
-* IsaacLab — BSD-3-Clause
-* unitree_rl_lab — Apache License 2.0
-* unitree_mujoco — BSD-3-Clause
-* go2_policy_runner — Apache License 2.0 (contains code derived from unitree_rl_lab, unitree_sdk2 and unitree_ros2, see its `NOTICE` and `THIRD_PARTY_NOTICES.md`)
-* unitree_ros — BSD-3-Clause
-* unitree_ros2 — BSD-3-Clause
-* unitree_sdk2 — BSD-3-Clause
-* unitree_sdk2_python — BSD-3-Clause
-* unitree_metrics — MIT License
+| Component | License |
+|---|---|
+| IsaacLab | BSD-3-Clause (`isaaclab_mimic`: Apache-2.0) |
+| unitree_rl_lab | Apache-2.0 |
+| unitree_mujoco | BSD-3-Clause |
+| unitree_ros | BSD-3-Clause |
+| unitree_ros2 | BSD-3-Clause |
+| unitree_sdk2 | BSD-3-Clause |
+| unitree_sdk2_python | BSD-3-Clause |
+| go2_policy_runner | Apache-2.0 |
+| unitree_metrics | MIT |
+| go2_eval (this repository) | Apache-2.0 |
 
-Refer to the individual submodule repositories and their `LICENSE` files for the complete license terms.
+`go2_eval` contains code derived from unitree_rl_lab. Each derived file keeps a header that lists the upstream files and the changes made. See [NOTICE](NOTICE) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for copyright holders, derived files and software that is installed separately.
+
+This project is not affiliated with, endorsed by, or sponsored by Unitree Robotics or NVIDIA. "Unitree", "Go2", "Isaac Sim" and "Isaac Lab" are used only to describe compatibility.

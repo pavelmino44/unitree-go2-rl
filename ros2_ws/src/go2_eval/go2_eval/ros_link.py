@@ -1,3 +1,5 @@
+# Copyright (c) 2026, unitree-go2-rl contributors.
+# SPDX-License-Identifier: Apache-2.0
 """ROS 2 side of the evaluation: talks to go2_policy_runner's policy_controller.
 
   * /cmd_vel                              velocity command of the scenario (heading hold, schedule)

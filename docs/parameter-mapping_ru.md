@@ -2,6 +2,8 @@
 
 [English](./parameter-mapping_en.md) | **Русский**
 
+Чтобы найти, где задаётся параметр, и изменить его, см. [карту настроек](./settings-map_ru.md).
+
 Где задаются параметры робота и политики и как они соотносятся между `unitree_rl_lab`, `unitree_mujoco` и `go2_policy_runner`. Пути указаны от корня репозитория.
 
 ## Файлы
@@ -14,7 +16,7 @@
 | urdf | `unitree_ros/robots/go2_description/urdf/go2_description.urdf` | Массы, пределы суставов, моментов и скоростей, используемые при обучении |
 | deploy | `unitree_rl_lab/logs/rsl_rl/unitree_go2_velocity/<run>/params/deploy.yaml` | Экспорт обучения; единственный результат обучения, который читает контроллер (вместе с `exported/policy.onnx`) |
 | mjcf | `unitree_mujoco/unitree_robots/go2/go2.xml` | Модель MuJoCo: массы, демпфирование, инерция ротора и трение суставов, пределы моментов |
-| bridge | `unitree_mujoco/simulate/src/unitree_sdk2_bridge.h` | Как MuJoCo превращает `lowcmd` в моменты |
+| bridge | `unitree_mujoco/simulate/src/unitree_sdk2_bridge.h` (C++ симулятор), `unitree_mujoco/simulate_python/unitree_sdk2py_bridge.py` (Python симулятор и `eval_sim.py`) | Как MuJoCo превращает `lowcmd` в моменты |
 | runner | `ros2_ws/src/go2_policy_runner/go2_policy_runner/config/go2.yaml` | Частота контроллера, позы FSM, ограничения безопасности, пределы скорости телеуправления |
 
 У `go2_policy_runner` нет собственных физических параметров. Всё, что относится к политике, он читает из `deploy` при запуске.
@@ -48,7 +50,7 @@
 | Трение в суставах | actuators: `Fs`, `Fd`; asset: `friction` | `<joint frictionloss damping>` | — |
 | Задержка управления | asset: `min_delay`, `max_delay` | — | есть |
 | Трение о поверхность | env: `physics_material`, `RobotSceneCfg.terrain` | `friction` в `class="foot"` (`priority="1"`) | — |
-| Частота физики и PD | env: `sim.dt` | `timestep` по умолчанию; поток PD в `bridge` | драйверы моторов |
+| Частота физики и PD | env: `sim.dt` | `timestep` (Python симулятор: `SIMULATE_DT` в `simulate_python/config.py`); PD в `bridge` | драйверы моторов |
 
 ## Быстрая проверка
 

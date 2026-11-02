@@ -1,3 +1,11 @@
+# Copyright (c) 2026, unitree-go2-rl contributors.
+# SPDX-License-Identifier: Apache-2.0
+#
+# This file contains code copied from unitree_rl_lab
+# (https://github.com/pavelmino44/unitree_rl_lab, branch pavel/go2-modifications, Apache License 2.0):
+#   scripts/rsl_rl/evaluate.py (the pure-python helpers, from _mean to the argument parser)
+# Changes by unitree-go2-rl contributors (2026):
+#   - only these helpers are copied (unchanged), with a module docstring and the imports they need
 """Metrics, summaries and tables of the evaluation: a verbatim copy of the pure-python part of
 unitree_rl_lab/scripts/rsl_rl/evaluate.py (same time series channels, same contact events, same sprint metrics,
 same summary keys, same tables), so that a MuJoCo report and an IsaacLab report are computed in exactly the

@@ -1,3 +1,12 @@
+# Copyright (c) 2026, unitree-go2-rl contributors.
+# SPDX-License-Identifier: Apache-2.0
+#
+# This file is a modified version of code from unitree_rl_lab
+# (https://github.com/pavelmino44/unitree_rl_lab, branch pavel/go2-modifications, Apache License 2.0):
+#   source/unitree_rl_lab/unitree_rl_lab/tasks/locomotion/robots/go2/eval_scenarios.py
+# Changes by unitree-go2-rl contributors (2026):
+#   - EvalScenario, scenario_meta, _resolve_command, hold_heading and command_schedule ported without IsaacLab
+#   - scenarios are read from the catalog of export_mujoco_scenarios.py
 """Scenarios of the MuJoCo evaluation, read from the catalog written by
 unitree_rl_lab/scripts/rsl_rl/export_mujoco_scenarios.py.
 

@@ -20,6 +20,9 @@ Sim-to-sim evaluation of Go2 locomotion policies in **MuJoCo**, on exactly the s
 - **Comparison.** `eval_compare` puts an IsaacLab report and a MuJoCo report side by side.
 - **GUI.** `evaluate --gui` opens the same window as `evaluate.py --gui`.
 
+Related documents: [Evaluation in IsaacLab](https://github.com/pavelmino44/unitree_rl_lab/blob/pavel/go2-modifications/doc/Evaluation_en.md)
+(scenarios and metrics), [Settings map](../../../docs/settings-map_en.md) (what affects the transfer and where to change it).
+
 ## How it works
 
 ```mermaid
@@ -73,7 +76,14 @@ cd ros2_ws && colcon build --packages-select go2_eval && source install/setup.ba
 
 ### 3. Run
 
+The policy run must contain `exported/policy.onnx` (written by `play.py`) and `params/deploy.yaml`
+(written by `train.py`). `evaluate` checks this before starting anything.
+
 ```bash
+source ~/unitree_env/bin/activate
+source /opt/ros/humble/setup.bash
+source ~/unitree-go2-rl/ros2_ws/install/setup.bash
+
 ros2 run go2_eval evaluate --gui
 ros2 run go2_eval evaluate --policy_dir ~/unitree-go2-rl/unitree_rl_lab/logs/rsl_rl/unitree_go2_velocity \
     --scenarios rough_pyramid_stairs_10cm --viewer
@@ -111,14 +121,18 @@ ros2 run go2_eval eval_report <mujoco report>.json         # the same windows as
 ros2 run go2_eval eval_compare <isaac report>.json <mujoco report>.json [--save [DIR]]
 ```
 
-`--save` writes the figures (`sim_to_sim.png`: per scenario and sweeps, `metrics.png`: one bar panel per metric with every episode as a dot) and the printed tables (`compare.txt`) into DIR; without
-DIR into `sim-to-sim_compare_<date>/` next to the MuJoCo report (the `eval/` folder of the policy run).
-Without a display the results are always saved there.
-
 `eval_compare` prints IsaacLab | MuJoCo for every common scenario: success, falls, speed, tracking,
-path, power, CoT, tilt and contacts. It also prints the mean differences and the largest success
-gaps. It draws one figure: per-scenario bars and the stairs / slope / blocks sweeps of both
-simulators.
+path, power, CoT, tilt and contacts, then the mean differences and the largest success gaps. It
+shows two figures in scrollable windows:
+
+- `sim_to_sim`: per-scenario bars (success, speed / command, power, trunk contacts) with every
+  episode as a dot, and the stairs / slope / blocks sweeps of both simulators;
+- `metrics`: one panel per metric of the mean over the scenarios, with the difference
+  MuJoCo - IsaacLab (green: better, red: worse than IsaacLab).
+
+`--save` writes `sim_to_sim.png`, `metrics.png` and the printed tables (`compare.txt`) into DIR;
+without DIR into `sim-to-sim_compare_<date>/` next to the MuJoCo report (the `eval/` folder of the
+policy run). Without a display the results are always saved there.
 
 ## Differences from IsaacLab
 
@@ -142,3 +156,12 @@ These are part of what sim-to-sim measures:
 
 When `evaluate.py` changes, copy `metrics.py` and `eval_report.py` from it again (see the header of
 `metrics.py`).
+
+## License
+
+[Apache License 2.0](../../../LICENSE). The software is provided "as is", without warranty of any kind.
+
+`metrics.py`, `eval_report.py`, `evaluate.py`, `scenarios.py` and `eval_gui.py` are derived from
+[unitree_rl_lab](https://github.com/pavelmino44/unitree_rl_lab) (Apache-2.0). Each of them keeps a
+header that lists the upstream files and the changes made. See
+[NOTICE](../../../NOTICE) and [THIRD_PARTY_NOTICES.md](../../../THIRD_PARTY_NOTICES.md).

@@ -2,6 +2,8 @@
 
 **English** | [Русский](./parameter-mapping_ru.md)
 
+To find where a parameter is set and change it, see the [settings map](./settings-map_en.md).
+
 Where the robot and policy parameters are defined and how they relate across `unitree_rl_lab`, `unitree_mujoco` and `go2_policy_runner`. Paths are relative to the repository root.
 
 ## Files
@@ -14,7 +16,7 @@ Where the robot and policy parameters are defined and how they relate across `un
 | urdf | `unitree_ros/robots/go2_description/urdf/go2_description.urdf` | Masses, joint limits, effort and velocity limits used in training |
 | deploy | `unitree_rl_lab/logs/rsl_rl/unitree_go2_velocity/<run>/params/deploy.yaml` | Exported by training; the only training output read by the controller (with `exported/policy.onnx`) |
 | mjcf | `unitree_mujoco/unitree_robots/go2/go2.xml` | MuJoCo model: masses, joint damping/armature/friction, torque limits |
-| bridge | `unitree_mujoco/simulate/src/unitree_sdk2_bridge.h` | How MuJoCo turns `lowcmd` into torques |
+| bridge | `unitree_mujoco/simulate/src/unitree_sdk2_bridge.h` (C++ simulator), `unitree_mujoco/simulate_python/unitree_sdk2py_bridge.py` (Python simulator and `eval_sim.py`) | How MuJoCo turns `lowcmd` into torques |
 | runner | `ros2_ws/src/go2_policy_runner/go2_policy_runner/config/go2.yaml` | Controller rate, FSM poses, safety limits, teleop speed limits |
 
 `go2_policy_runner` has no physical parameters of its own. Policy-related values come from `deploy` at startup.
@@ -48,7 +50,7 @@ Not exported to `deploy`. Differences here are the sim-to-real gap.
 | Joint friction | actuators: `Fs`, `Fd`; asset: `friction` | `<joint frictionloss damping>` | — |
 | Actuation delay | asset: `min_delay`, `max_delay` | — | present |
 | Ground friction | env: `physics_material`, `RobotSceneCfg.terrain` | `class="foot"` `friction` (`priority="1"`) | — |
-| Physics / PD rate | env: `sim.dt` | default `timestep`; PD thread in `bridge` | motor drivers |
+| Physics / PD rate | env: `sim.dt` | `timestep` (Python simulator: `SIMULATE_DT` in `simulate_python/config.py`); PD in `bridge` | motor drivers |
 
 ## Quick checks
 

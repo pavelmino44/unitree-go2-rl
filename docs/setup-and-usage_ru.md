@@ -175,12 +175,58 @@ conda activate env_isaaclab
 Затем запустите контроллер:
 
 ```bash
-cd ~/Unitree_Isaac/unitree_rl_lab/deploy/robots/go2/build
+cd ~/unitree-go2-rl/unitree_rl_lab/deploy/robots/go2/build
 
 ./go2_ctrl
 ```
 
 Контроллер взаимодействует с симуляцией MuJoCo через настроенный сетевой интерфейс и DDS.
+
+---
+
+## Оценка политики
+
+Одни и те же фиксированные сценарии (ровная земля, лестницы, ямы, склоны, случайные блоки, ходьба боком и назад, разворот, разгон и торможение) запускаются в IsaacLab и в MuJoCo. Отчёты пишутся в одном формате, поэтому их можно сравнивать напрямую.
+
+### В IsaacLab
+
+```bash
+conda activate env_isaaclab
+cd ~/unitree-go2-rl/unitree_rl_lab
+
+python scripts/rsl_rl/evaluate.py --gui
+```
+
+Сценарии, метрики и аргументы: [Оценка политики](https://github.com/pavelmino44/unitree_rl_lab/blob/pavel/go2-modifications/doc/Evaluation_ru.md).
+
+### В MuJoCo (`go2_eval`)
+
+Один раз, а также после изменения `eval_scenarios.py` или `ROUGH_TERRAINS_CFG`, экспортируйте сценарии и их террейны:
+
+```bash
+conda activate env_isaaclab
+cd ~/unitree-go2-rl/unitree_rl_lab
+
+python scripts/rsl_rl/export_mujoco_scenarios.py --headless --eval_seed 42
+```
+
+В папке запуска политики должен быть `exported/policy.onnx` (его создаёт `play.py`, см. выше). Затем:
+
+```bash
+source ~/unitree_env/bin/activate
+source /opt/ros/humble/setup.bash
+source ~/unitree-go2-rl/ros2_ws/install/setup.bash
+
+ros2 run go2_eval evaluate --gui
+```
+
+### Сравнение IsaacLab и MuJoCo
+
+```bash
+ros2 run go2_eval eval_compare <отчёт isaac>.json <отчёт mujoco>.json --save
+```
+
+Подробнее: [README go2_eval](../ros2_ws/src/go2_eval/README.md) (на английском).
 
 ---
 
@@ -199,7 +245,7 @@ cd ~/Unitree_Isaac/unitree_rl_lab/deploy/robots/go2/build
 
 ## Дополнительная документация
 
-Более подробную документацию по каждому из репозиториев, включённых в проект, можно найти в соответствующих файлах `README.md`.
+Список всех документов проекта и компонентов: [docs/README_ru.md](./README_ru.md).
 
 ---
 

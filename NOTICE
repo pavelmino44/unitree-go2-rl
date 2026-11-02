@@ -1,0 +1,40 @@
+unitree-go2-rl
+Copyright (c) 2026, unitree-go2-rl contributors.
+
+The files of this repository (documentation, top-level configuration and the go2_eval package in
+ros2_ws/src/go2_eval) are licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This repository also references the following projects as Git submodules. They are separate
+works: each is distributed under its own license, kept in the submodule, and is NOT covered by
+the LICENSE of this repository.
+
+  IsaacLab              BSD 3-Clause License (isaaclab_mimic: Apache License 2.0)
+                        Copyright (c) 2022-2025, The Isaac Lab Project Developers.
+  unitree_rl_lab        Apache License 2.0
+                        Copyright (c) 2025, Unitree Robotics Co., Ltd.
+                        Copyright 2024 The Isaac Lab Project Developers.
+  unitree_mujoco        BSD 3-Clause License
+                        Copyright (c) 2016-2024 HangZhou YuShu TECHNOLOGY CO.,LTD. ("Unitree Robotics").
+  unitree_ros           BSD 3-Clause License
+                        Copyright (c) 2016-2022 HangZhou YuShu TECHNOLOGY CO.,LTD. ("Unitree Robotics").
+  unitree_ros2          BSD 3-Clause License
+                        Copyright (c) 2016-2024 HangZhou YuShu TECHNOLOGY CO.,LTD. ("Unitree Robotics").
+  unitree_sdk2          BSD 3-Clause License
+                        Copyright (c) 2016-2023 HangZhou YuShu TECHNOLOGY CO.,LTD. ("Unitree Robotics").
+  unitree_sdk2_python   BSD 3-Clause License
+                        Copyright (c) 2016-2024 HangZhou YuShu TECHNOLOGY CO.,LTD. ("Unitree Robotics").
+  go2_policy_runner     Apache License 2.0
+                        Copyright (c) 2026, unitree-go2-rl contributors.
+                        (contains code derived from unitree_rl_lab, unitree_sdk2 and unitree_ros2,
+                        see its NOTICE and THIRD_PARTY_NOTICES.md)
+  unitree_metrics       MIT License
+                        Copyright (c) 2026 Pavel Mino.
+
+The go2_eval package contains code derived from unitree_rl_lab, Apache License 2.0.
+
+See THIRD_PARTY_NOTICES.md for the submodule details, the list of derived files and the license
+texts.
+
+Unitree, Go2 and related names are trademarks of Unitree Robotics. NVIDIA, Isaac Sim and Isaac Lab
+are trademarks of NVIDIA Corporation. This project is not affiliated with, endorsed by, or
+sponsored by Unitree Robotics or NVIDIA.

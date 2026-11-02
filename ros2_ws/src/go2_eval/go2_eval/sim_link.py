@@ -1,3 +1,5 @@
+# Copyright (c) 2026, unitree-go2-rl contributors.
+# SPDX-License-Identifier: Apache-2.0
 """Control connection to the MuJoCo evaluation simulator (unitree_mujoco/simulate_python/eval_sim.py).
 
 The simulator runs in its own process (and its own Python, if needed: it uses mujoco and unitree_sdk2py, whose

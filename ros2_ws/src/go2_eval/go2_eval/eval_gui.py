@@ -1,3 +1,12 @@
+# Copyright (c) 2026, unitree-go2-rl contributors.
+# SPDX-License-Identifier: Apache-2.0
+#
+# This file is a modified version of code from unitree_rl_lab
+# (https://github.com/pavelmino44/unitree_rl_lab, branch pavel/go2-modifications, Apache License 2.0):
+#   scripts/rsl_rl/eval_gui.py
+# Changes by unitree-go2-rl contributors (2026):
+#   - settings of the MuJoCo evaluation (catalog, policy folder, DDS, viewer)
+#   - the scenario list is read from the exported catalog
 """Tk GUI for the MuJoCo evaluation (go2_eval evaluate --gui).
 
 The same window as unitree_rl_lab/scripts/rsl_rl/eval_gui.py (same look, same scenario list, same settings

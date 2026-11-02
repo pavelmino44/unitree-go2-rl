@@ -1,3 +1,12 @@
+# Copyright (c) 2026, unitree-go2-rl contributors.
+# SPDX-License-Identifier: Apache-2.0
+#
+# This file is a modified version of code from unitree_rl_lab
+# (https://github.com/pavelmino44/unitree_rl_lab, branch pavel/go2-modifications, Apache License 2.0):
+#   scripts/rsl_rl/evaluate.py
+# Changes by unitree-go2-rl contributors (2026):
+#   - the rollout loop and the episode metrics ported to MuJoCo + go2_policy_runner
+#   - process, controller and simulator handling for MuJoCo
 """Evaluation of a policy on the fixed scenarios of unitree_rl_lab, in MuJoCo, through go2_policy_runner.
 
 The MuJoCo counterpart of unitree_rl_lab/scripts/rsl_rl/evaluate.py: the same scenarios (terrain tile, spawn,

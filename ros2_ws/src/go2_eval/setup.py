@@ -1,3 +1,5 @@
+# Copyright (c) 2026, unitree-go2-rl contributors.
+# SPDX-License-Identifier: Apache-2.0
 from setuptools import setup
 
 package_name = "go2_eval"

@@ -1,3 +1,10 @@
+# Copyright (c) 2026, unitree-go2-rl contributors.
+# SPDX-License-Identifier: Apache-2.0
+#
+# This file is a copy of code from unitree_rl_lab
+# (https://github.com/pavelmino44/unitree_rl_lab, branch pavel/go2-modifications, Apache License 2.0):
+#   scripts/rsl_rl/eval_report.py
+# Unchanged apart from this header.
 """Viewer for the JSON reports written by evaluate.py.
 
 It is started automatically when evaluate.py finishes (use --no_report there to skip it), and it can be
