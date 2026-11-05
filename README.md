@@ -1,5 +1,13 @@
 # Unitree Go2 RL
 
+[![Ubuntu 22.04](https://img.shields.io/badge/Ubuntu-22.04_LTS-E95420?logo=ubuntu&logoColor=white)](https://releases.ubuntu.com/22.04/)
+[![ROS 2 Humble](https://img.shields.io/badge/ROS_2-Humble-22314E?logo=ros&logoColor=white)](https://docs.ros.org/en/humble/)
+[![Isaac Sim 5.1.0](https://img.shields.io/badge/Isaac_Sim-5.1.0-76B900?logo=nvidia&logoColor=white)](https://docs.isaacsim.omniverse.nvidia.com/)
+[![Isaac Lab 2.3.0](https://img.shields.io/badge/Isaac_Lab-2.3.0-76B900?logo=nvidia&logoColor=white)](https://isaac-sim.github.io/IsaacLab/)
+[![MuJoCo](https://img.shields.io/badge/MuJoCo-3.x-0B5FAE)](https://mujoco.org/)
+[![Python](https://img.shields.io/badge/Python-3.10_%7C_3.11-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+
 Research framework for reinforcement learning, autonomous locomotion, and sim-to-sim evaluation of the Unitree Go2 quadruped robot.
 
 The project integrates the main components of the experimental stack as Git submodules. The repository is intended to provide a reproducible environment for development, training, evaluation, and analysis of locomotion controllers.
@@ -59,6 +67,60 @@ The repositories listed above are included as Git submodules. `go2_policy_runner
 The main repository records the exact commit of each submodule used by the project. This makes it possible to reproduce a known project state even when the individual component repositories continue to evolve.
 
 The branches specified in `.gitmodules` are used for convenient development and updates, while the commit recorded by the main repository determines the exact version used in a particular revision.
+
+## Requirements
+
+> [!NOTE]
+> **Tested on Ubuntu 22.04 LTS (x86_64)** with ROS 2 Humble, Isaac Sim 5.1.0 and Isaac Lab 2.3.0. Other configurations may work but are not tested.
+
+### System
+
+| Requirement | Version | Notes |
+| --- | --- | --- |
+| OS | Ubuntu 22.04 LTS, x86_64 | |
+| GPU | NVIDIA RTX with a recent driver | required by Isaac Sim for training and IsaacLab evaluation; see the [Isaac Sim requirements](https://docs.isaacsim.omniverse.nvidia.com/latest/installation/requirements.html) |
+| Conda | Miniconda / Anaconda | environment `env_isaaclab` |
+| Git | with submodule support | |
+
+### Training and evaluation in IsaacLab
+
+| Dependency | Version | Notes |
+| --- | --- | --- |
+| Isaac Sim | 5.1.0 | installed separately, NVIDIA Isaac Sim license |
+| Isaac Lab | 2.3.0 | `IsaacLab` submodule |
+| Python | 3.11 | conda environment `env_isaaclab` |
+| RSL-RL | installed with Isaac Lab | PPO (Actor-Critic) |
+| unitree_rl_lab | | `unitree_rl_lab` submodule, installed in editable mode |
+
+### Simulation in MuJoCo
+
+| Dependency | Version | Notes |
+| --- | --- | --- |
+| Python | 3.10 | virtual environment `~/unitree_env` |
+| MuJoCo Python bindings | 3.x | `pip install mujoco` |
+| unitree_sdk2_python | | `unitree_sdk2_python` submodule |
+| Cyclone DDS | 0.10.x | required by `unitree_sdk2_python` |
+| pygame | | optional, gamepad control |
+
+### Deployment and evaluation with ROS 2
+
+| Dependency | Version | Notes |
+| --- | --- | --- |
+| ROS 2 | Humble | |
+| rmw_cyclonedds_cpp | | Unitree robots communicate over Cyclone DDS |
+| unitree_go, unitree_api | | message packages from the `unitree_ros2` submodule |
+| ONNX Runtime (C/C++, CPU) | 1.22.0 | downloaded by `go2_policy_runner/scripts/fetch_onnxruntime.sh` |
+| Eigen 3, yaml-cpp, ncurses | | `go2_policy_runner` |
+| NumPy, Matplotlib, Tk | | `go2_eval` |
+
+System packages for the ROS 2 part:
+
+```bash
+sudo apt install ros-humble-rmw-cyclonedds-cpp libeigen3-dev libyaml-cpp-dev libncurses-dev \
+                 python3-numpy python3-matplotlib python3-tk
+```
+
+Step-by-step installation and usage: [docs/setup-and-usage_en.md](docs/setup-and-usage_en.md).
 
 ## Usage
 
