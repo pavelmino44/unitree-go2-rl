@@ -30,3 +30,7 @@
 	path = unitree_metrics
 	url = git@github.com:pavelmino44/unitree_metrics.git
 	branch = main
+[submodule "ros2_ws/src/go2_policy_runner"]
+	path = ros2_ws/src/go2_policy_runner
+	url = git@github.com:pavelmino44/go2_policy_runner.git
+	branch = main

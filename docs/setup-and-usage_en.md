@@ -1,5 +1,7 @@
 # Setup and Usage
 
+**English** | [Русский](./setup-and-usage_ru.md)
+
 This document contains the environment configuration and basic commands required to run the Unitree Go2 reinforcement learning stack.
 
 ## Python Environment
@@ -173,12 +175,58 @@ conda activate env_isaaclab
 Then run the controller:
 
 ```bash
-cd ~/Unitree_Isaac/unitree_rl_lab/deploy/robots/go2/build
+cd ~/unitree-go2-rl/unitree_rl_lab/deploy/robots/go2/build
 
 ./go2_ctrl
 ```
 
 The controller communicates with the MuJoCo simulation through the configured network and DDS interface.
+
+---
+
+## Policy Evaluation
+
+The same fixed scenarios (flat ground, stairs, pits, slopes, random blocks, sideways and backward walking, turning, sprint and stop) run in IsaacLab and in MuJoCo. Both write reports in the same format, so they can be compared directly.
+
+### In IsaacLab
+
+```bash
+conda activate env_isaaclab
+cd ~/unitree-go2-rl/unitree_rl_lab
+
+python scripts/rsl_rl/evaluate.py --gui
+```
+
+Scenarios, metrics and arguments: [Evaluation](https://github.com/pavelmino44/unitree_rl_lab/blob/pavel/go2-modifications/doc/Evaluation_en.md).
+
+### In MuJoCo (`go2_eval`)
+
+Export the scenarios and their terrains once, and again after changing `eval_scenarios.py` or `ROUGH_TERRAINS_CFG`:
+
+```bash
+conda activate env_isaaclab
+cd ~/unitree-go2-rl/unitree_rl_lab
+
+python scripts/rsl_rl/export_mujoco_scenarios.py --headless --eval_seed 42
+```
+
+The policy run must contain `exported/policy.onnx` (written by `play.py`, see above). Then:
+
+```bash
+source ~/unitree_env/bin/activate
+source /opt/ros/humble/setup.bash
+source ~/unitree-go2-rl/ros2_ws/install/setup.bash
+
+ros2 run go2_eval evaluate --gui
+```
+
+### Comparing IsaacLab and MuJoCo
+
+```bash
+ros2 run go2_eval eval_compare <isaac report>.json <mujoco report>.json --save
+```
+
+Details: [go2_eval README](../ros2_ws/src/go2_eval/README.md).
 
 ---
 
@@ -197,7 +245,7 @@ These values correspond to the current development machine configuration and may
 
 ## More documentation
 
-You can find more detailed documentation for each of the repositories included in the project in their respective README.md files.
+The index of all project and component documents: [docs/README.md](./README.md).
 
 ---
 

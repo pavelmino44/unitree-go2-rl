@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>go2_eval</name>
+  <version>0.1.0</version>
+  <description>
+    Evaluation of Go2 locomotion policies in MuJoCo on the fixed scenarios of unitree_rl_lab (the same terrains,
+    commands, end conditions, metrics and report as unitree_rl_lab evaluate.py), through go2_policy_runner.
+  </description>
+  <maintainer email="pavelmino44@gmail.com">Pavel</maintainer>
+  <license>Apache-2.0</license>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>go2_policy_runner</exec_depend>
+  <exec_depend>go2_policy_runner_interfaces</exec_depend>
+  <exec_depend>ros2launch</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-matplotlib</exec_depend>
+  <exec_depend>python3-tk</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
