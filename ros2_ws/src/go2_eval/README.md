@@ -122,15 +122,18 @@ ros2 run go2_eval eval_compare <isaac report>.json <mujoco report>.json [--save 
 ```
 
 `eval_compare` prints IsaacLab | MuJoCo for every common scenario: success, falls, speed, tracking,
-path, power, CoT, tilt and contacts, then the mean differences and the largest success gaps. It
-shows two figures in scrollable windows:
+path, power, CoT, tilt and contacts, then the mean differences and the largest success gaps. The
+figures are shown in one window with tabs:
 
-- `sim_to_sim`: per-scenario bars (success, speed / command, power, trunk contacts) with every
-  episode as a dot, and the stairs / slope / blocks sweeps of both simulators;
-- `metrics`: one panel per metric of the mean over the scenarios, with the difference
+- per scenario: bars (success, speed / command, power, trunk contacts) with every episode as a dot;
+- capability sweeps: the stairs / slope / blocks sweeps of both simulators;
+- metrics: one panel per metric of the mean over the scenarios, with the difference
   MuJoCo - IsaacLab (green: better, red: worse than IsaacLab).
 
-`--save` writes `sim_to_sim.png`, `metrics.png` and the printed tables (`compare.txt`) into DIR;
+Each tab is sized to the window and follows it when it is resized, so it fits a laptop screen.
+
+`--save` writes the tabs as `NN_<tab>.png` (laid out as on a 1920 x 1080 screen) and the printed
+tables (`compare.txt`) into DIR;
 without DIR into `sim-to-sim_compare_<date>/` next to the MuJoCo report (the `eval/` folder of the
 policy run). Without a display the results are always saved there.
 
